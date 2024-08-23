@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:todolist/managers/login_manger.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
-
+  final VoidCallback showRegister;
+  const LoginPage({super.key, required this.showRegister});
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -132,12 +132,15 @@ class _LoginPageState extends State<LoginPage> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
-                    ' Register',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
+                  GestureDetector(
+                    onTap: widget.showRegister,
+                    child: Text(
+                      ' Register',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   )
                 ],
