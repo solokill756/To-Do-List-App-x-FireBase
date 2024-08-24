@@ -12,12 +12,18 @@ class _RegisterPageState extends State<RegisterPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _comfirmPasswordController = TextEditingController();
-  final RegisterManger registerManger = RegisterManger();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _ageController = TextEditingController();
+  final RegisterManager registerManger = RegisterManager();
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
     _comfirmPasswordController.dispose();
+    _ageController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
     super.dispose();
   }
 
@@ -116,6 +122,71 @@ class _RegisterPageState extends State<RegisterPage> {
               SizedBox(
                 height: 25,
               ),
+
+              /// new
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: TextField(
+                    controller: _firstNameController,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 15),
+                      border: InputBorder.none,
+                      hintText: "First Name",
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: TextField(
+                    controller: _lastNameController,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 15),
+                      border: InputBorder.none,
+                      hintText: "Last Name",
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: TextField(
+                    controller: _ageController,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 15),
+                      border: InputBorder.none,
+                      hintText: "Age",
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 25,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: GestureDetector(
@@ -123,7 +194,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     await registerManger.signUp(
                         _emailController.text.trim(),
                         _passwordController.text.trim(),
-                        _comfirmPasswordController.text.trim());
+                        _comfirmPasswordController.text.trim(),
+                        _firstNameController.text.trim(),
+                        _lastNameController.text.trim(),
+                        int.parse(_ageController.text.trim()));
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),

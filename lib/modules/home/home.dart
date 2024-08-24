@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todolist/managers/card_manager.dart';
+import 'package:todolist/managers/user_manager.dart';
 import 'package:todolist/modules/home/widget/CardBody.dart';
 import 'package:todolist/modules/home/widget/card_add_weiget.dart';
 
@@ -13,6 +14,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final CardManager _cardManager = CardManager();
+  final UserManager userManager = UserManager();
   // ignore: unused_element
   void _addItem(String content) {
     setState(() {
@@ -29,6 +31,13 @@ class _HomeState extends State<Home> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    userManager.getUserData(FirebaseAuth.instance.currentUser!.uid.toString());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -37,26 +46,22 @@ class _HomeState extends State<Home> {
         title: const Text(
           'ToDoList',
           style: TextStyle(
-            fontSize: 50,
+            fontSize: 40,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
         ),
         actions: [
-          MaterialButton(
-            color: Colors.deepPurple,
-            elevation: 0,
-            onPressed: () async {
+          GestureDetector(
+            onTap: () async {
               await FirebaseAuth.instance.signOut();
             },
-            child: Text(
-              'Log Out',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold),
+            child: Icon(
+              Icons.logout,
+              color: Colors.white,
+              size: 30,
             ),
-          )
+          ),
         ],
       ),
       body: SingleChildScrollView(
