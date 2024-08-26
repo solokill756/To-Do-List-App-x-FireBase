@@ -33,7 +33,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     // TODO: implement initState
-    userManager.getUserData(FirebaseAuth.instance.currentUser!.uid.toString());
+    // userManager.getUserData();
     super.initState();
   }
 

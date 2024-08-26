@@ -24,9 +24,9 @@ class UserModel {
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      email: map['email'] as String,
-      firstName: map['firstName'] as String,
-      lastName: map['lastName'] as String,
+      email: map['email'] ?? '',
+      firstName: map['first name'] ?? '',
+      lastName: map['last name'] ?? '',
       age: map['age'] as int,
     );
   }
