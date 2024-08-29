@@ -31,8 +31,8 @@ class CardAddWeiget extends StatelessWidget {
               height: 50,
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {
-                  addCard(content);
+                onPressed: () async {
+                  await addCard(content);
                   Navigator.pop(context);
                 },
                 child: const Text(

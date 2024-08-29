@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_cloud_firestore/firebase_cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:todolist/managers/card_manager.dart';
 import 'package:todolist/managers/user_manager.dart';
+import 'package:todolist/models/item.dart';
 import 'package:todolist/modules/home/widget/CardBody.dart';
 import 'package:todolist/modules/home/widget/card_add_weiget.dart';
 
@@ -64,15 +66,33 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          children: _cardManager.items.map(
-            (item) {
-              return CardBody(deleteCard: _deleteItem, item: item);
-            },
-          ).toList(),
-        ),
+      body: StreamBuilder(
+        stream: _cardManager.getWorksStream(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+                child: Text("Something went wrong: ${snapshot.error}"));
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+          List<Item> works = [];
+          snapshot.data!.docs.forEach((doc) {
+            Item newItem = Item(id: doc.id, content: doc["name"].toString());
+            works.add(newItem);
+          });
+          return SingleChildScrollView(
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              children: works.map(
+                (item) {
+                  return CardBody(deleteCard: _deleteItem, item: item);
+                },
+              ).toList(),
+            ),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue,
