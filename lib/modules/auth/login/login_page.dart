@@ -24,13 +24,13 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 139, 99, 99),
+      backgroundColor: const Color.fromARGB(255, 139, 99, 99),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'HELLO AGAIN!',
                 style: TextStyle(
                   color: Colors.black,
@@ -38,17 +38,17 @@ class _LoginPageState extends State<LoginPage> {
                   fontSize: 30,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text(
+              const Text(
                 "Welcome back , you've been missed",
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.black,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Padding(
@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   child: TextField(
                     controller: _emailController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       contentPadding: EdgeInsets.only(left: 15),
                       border: InputBorder.none,
                       hintText: "Email",
@@ -69,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               Padding(
@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: TextField(
                     controller: _passwordController,
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       contentPadding: EdgeInsets.only(left: 15),
                       border: InputBorder.none,
                       hintText: "Password",
@@ -91,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               Padding(
@@ -102,12 +102,13 @@ class _LoginPageState extends State<LoginPage> {
                         _passwordController.text.trim());
                   },
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 20),
                     decoration: BoxDecoration(
                       color: Colors.deepPurple,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         'Sign in',
                         style: TextStyle(
@@ -119,11 +120,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -133,12 +134,12 @@ class _LoginPageState extends State<LoginPage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return ForgotpasswordPage();
+                              return const ForgotpasswordPage();
                             },
                           ),
                         );
                       },
-                      child: Text(
+                      child: const Text(
                         'Forgot Password ?',
                         style: TextStyle(
                           fontSize: 15,
@@ -150,13 +151,13 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Not a menber ?',
                     style: TextStyle(
                       fontSize: 15,
@@ -166,7 +167,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   GestureDetector(
                     onTap: widget.showRegister,
-                    child: Text(
+                    child: const Text(
                       ' Register',
                       style: TextStyle(
                         fontSize: 15,

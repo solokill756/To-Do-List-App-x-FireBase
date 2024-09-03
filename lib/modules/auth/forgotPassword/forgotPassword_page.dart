@@ -37,8 +37,8 @@ class _ForgotpasswordPageState extends State<ForgotpasswordPage> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25),
               child: Text(
                 'Enter your password and we will send you a password reset link',
                 style: TextStyle(
@@ -48,7 +48,7 @@ class _ForgotpasswordPageState extends State<ForgotpasswordPage> {
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Padding(
@@ -62,17 +62,17 @@ class _ForgotpasswordPageState extends State<ForgotpasswordPage> {
                 child: TextField(
                   controller: _emailController,
                   decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 15),
+                      contentPadding: const EdgeInsets.only(left: 15),
                       border: InputBorder.none,
                       hintText: "Email",
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.deepPurple),
+                        borderSide: const BorderSide(color: Colors.deepPurple),
                         borderRadius: BorderRadius.circular(12),
                       )),
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             MaterialButton(
@@ -84,7 +84,7 @@ class _ForgotpasswordPageState extends State<ForgotpasswordPage> {
                   showDialog(
                       context: context,
                       builder: (context) {
-                        return AlertDialog(
+                        return const AlertDialog(
                           backgroundColor: Colors.black12,
                           content: Text(
                             'Reset Password Link has been send to your email !',
@@ -104,7 +104,7 @@ class _ForgotpasswordPageState extends State<ForgotpasswordPage> {
                           backgroundColor: Colors.black12,
                           content: Text(
                             e.toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
                             ),
@@ -114,7 +114,7 @@ class _ForgotpasswordPageState extends State<ForgotpasswordPage> {
                   _emailController.clear();
                 }
               },
-              child: Text(
+              child: const Text(
                 'Reset Password',
                 style: TextStyle(
                   color: Colors.white,

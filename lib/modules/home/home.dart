@@ -18,9 +18,9 @@ class _HomeState extends State<Home> {
   final CardManager _cardManager = CardManager();
   final UserManager userManager = UserManager();
   // ignore: unused_element
-  void _addItem(String content) {
+  void _addItem(String content, String dateBegin, String dateEnd) {
     setState(() {
-      _cardManager.addItem(content);
+      _cardManager.addItem(content, dateBegin, dateEnd);
       print(1);
     });
   }
@@ -58,7 +58,7 @@ class _HomeState extends State<Home> {
             onTap: () async {
               await FirebaseAuth.instance.signOut();
             },
-            child: Icon(
+            child: const Icon(
               Icons.logout,
               color: Colors.white,
               size: 30,
@@ -75,15 +75,19 @@ class _HomeState extends State<Home> {
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           List<Item> works = [];
-          snapshot.data!.docs.forEach((doc) {
-            Item newItem = Item(id: doc.id, content: doc["name"].toString());
+          for (var doc in snapshot.data!.docs) {
+            Item newItem = Item(
+                id: doc.id,
+                content: doc["name"].toString(),
+                date_begin: doc["date_begin"],
+                date_end: doc["date_end"]);
             works.add(newItem);
-          });
+          }
           return SingleChildScrollView(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               children: works.map(
                 (item) {

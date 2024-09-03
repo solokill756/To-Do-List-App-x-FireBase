@@ -2,13 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_cloud_firestore/firebase_cloud_firestore.dart';
 import 'package:todolist/managers/user_manager.dart';
 import 'package:todolist/models/item.dart';
-import 'package:todolist/models/user_model.dart';
 
 class CardManager {
   final List<Item> items = [];
   String userId = FirebaseAuth.instance.currentUser!.uid;
   final UserManager userManager = UserManager();
-  Future<void> addItem(String content) async {
+  Future<void> addItem(String content, String dateBegin, String dateEnd) async {
     await FirebaseFirestore.instance
         .collection("users")
         .get()
@@ -19,8 +18,11 @@ class CardManager {
               .collection("users")
               .doc(doc.id)
               .collection("works")
-              .add({"name": content, "date": DateTime.now().toString()}).then(
-                  (value) {
+              .add({
+            "name": content,
+            "date_begin": dateBegin,
+            "date_end": dateEnd,
+          }).then((value) {
             print("add sucess");
             getWorksStream();
           }).catchError(
@@ -32,7 +34,7 @@ class CardManager {
   }
 
   Future<void> deleteCard(String id) async {
-    print("id : ${id}");
+    print("id : $id");
     await FirebaseFirestore.instance
         .collection("users")
         .get()
@@ -64,10 +66,13 @@ class CardManager {
       if (querySnapshot.docs.isEmpty) {
         print("Cannot get user");
         // Xử lý logic nếu không tìm thấy user
-        yield* Stream<QuerySnapshot>.empty();
+        yield* const Stream<QuerySnapshot>.empty();
       } else {
         DocumentSnapshot doc = querySnapshot.docs.first;
-        yield* doc.reference.collection("works").snapshots();
+        yield* doc.reference
+            .collection("works")
+            .orderBy("date_end", descending: false)
+            .snapshots();
       }
     }
   }
